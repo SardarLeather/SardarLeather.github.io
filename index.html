@@ -254,6 +254,7 @@
             background: linear-gradient(90deg, transparent, var(--gold), transparent);
             opacity: 0;
             transition: opacity 0.3s ease;
+            z-index: 1;
         }
         
         .product-card:hover::before {
@@ -720,13 +721,14 @@
     <script>
         // Product Data Array
         const products = [
+            // Card Holders (19 products)
             {
                 id: 1,
                 category: 'cardholders',
                 name: 'Slim Card Case',
                 description: 'Our signature slim card case, crafted from the finest Italian leather, designed to carry your essential cards with minimalist elegance.',
                 imageUrl: 'https://images.unsplash.com/photo-1550555237-2cf2ef81d6d9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80',
-                videoUrl: 'https://player.vimeo.com/video/370756467?background=1',
+                videoUrl: '',
                 details: 'Genuine Italian leather | Hand-stitched edges | 4 card slots | RFID protection | Dimensions: 8.5 x 5.5 cm'
             },
             {
@@ -735,223 +737,134 @@
                 name: 'Executive Card Holder',
                 description: 'A sophisticated card holder with a money clip, perfect for the modern professional who values both style and functionality.',
                 imageUrl: 'https://images.unsplash.com/photo-1627123424574-724758594e93?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80',
-                videoUrl: 'https://player.vimeo.com/video/370756467?background=1',
+                videoUrl: '',
                 details: 'Premium calf leather | Stainless steel money clip | 6 card slots | Hand-finished edges | Dimensions: 9 x 6 cm'
             },
             {
                 id: 3,
-                category: 'wallets',
-                name: 'Classic Billfold',
-                description: 'The timeless billfold wallet, featuring multiple compartments for cards and cash, embodying traditional craftsmanship with modern sensibilities.',
-                imageUrl: 'https://images.unsplash.com/photo-1550581190-9a1bd5aebed5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80',
-                videoUrl: 'https://player.vimeo.com/video/370756467?background=1',
-                details: 'Full-grain leather | 8 card slots | 2 bill compartments | Hand-stitched seams | Dimensions: 10.5 x 9 cm when closed'
+                category: 'cardholders',
+                name: 'Classic Card Holder',
+                description: 'A timeless design that combines functionality with elegance, perfect for everyday use.',
+                imageUrl: 'https://images.unsplash.com/photo-1550555237-2cf2ef81d6d9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80',
+                videoUrl: '',
+                details: 'Genuine leather | 6 card slots | Slim profile | Dimensions: 9 x 6 cm'
             },
             {
                 id: 4,
-                category: 'wallets',
-                name: 'Modern Zip Wallet',
-                description: 'A contemporary wallet with a secure zipper closure, offering ample storage while maintaining a sleek profile.',
-                imageUrl: 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80',
-                videoUrl: 'https://player.vimeo.com/video/370756467?background=1',
-                details: 'Vegetable-tanned leather | YKK zipper | 12 card slots | Coin compartment | Dimensions: 11 x 9.5 cm when closed'
+                category: 'cardholders',
+                name: 'Premium Card Wallet',
+                description: 'A premium card wallet with multiple compartments for organized storage of your cards and cash.',
+                imageUrl: 'https://images.unsplash.com/photo-1627123424574-724758594e93?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80',
+                videoUrl: '',
+                details: 'Top-grain leather | 8 card slots | Cash compartment | Dimensions: 10 x 7 cm'
             },
             {
                 id: 5,
-                category: 'longwallets',
-                name: 'Passport Wallet',
-                description: 'An elegant long wallet designed to securely hold your passport, cards, and travel documents with refined organization.',
-                imageUrl: 'https://images.unsplash.com/photo-1625124380636-6bcb5898732e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80',
-                videoUrl: 'https://player.vimeo.com/video/370756467?background=1',
-                details: 'Luxury pebbled leather | Passport slot | 10 card slots | 2 bill compartments | Dimensions: 19 x 10 cm when closed'
+                category: 'cardholders',
+                name: 'Minimalist Card Sleeve',
+                description: 'Ultra-slim design for those who prefer carrying only the essentials in a sleek package.',
+                imageUrl: 'https://images.unsplash.com/photo-1550555237-2cf2ef81d6d9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80',
+                videoUrl: '',
+                details: 'Premium leather | 2-3 card capacity | RFID blocking | Dimensions: 8.5 x 5.5 cm'
             },
             {
                 id: 6,
-                category: 'longwallets',
-                name: 'Checkbook Wallet',
-                description: 'A distinguished long wallet with checkbook capacity, offering generous storage without compromising on sophistication.',
-                imageUrl: 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80',
-                videoUrl: 'https://player.vimeo.com/video/370756467?background=1',
-                details: 'Top-grain leather | Checkbook slot | 8 card slots | 3 bill compartments | Dimensions: 20 x 10.5 cm when closed'
-            }
-        ];
-
-        // State variables
-        let currentCategory = '';
-        let currentProduct = null;
-        let currentCarouselIndex = 0;
-        let carouselItems = [];
-
-        // DOM Elements
-        const homeView = document.getElementById('home-view');
-        const categoryView = document.getElementById('category-view');
-        const productView = document.getElementById('product-view');
-        const productGrid = document.getElementById('product-grid');
-        const productCarousel = document.getElementById('product-carousel');
-        const orderModal = document.getElementById('order-modal');
-        const carouselControls = document.querySelector('.carousel-controls');
-
-        // View Management Functions
-        function showHome() {
-            homeView.style.display = 'grid';
-            categoryView.style.display = 'none';
-            productView.style.display = 'none';
-            window.scrollTo(0, 0);
-        }
-
-        function showCategory(category) {
-            currentCategory = category;
-            homeView.style.display = 'none';
-            categoryView.style.display = 'block';
-            productView.style.display = 'none';
-            
-            // Filter and display products
-            productGrid.innerHTML = '';
-            const categoryProducts = products.filter(p => p.category === category);
-            
-            categoryProducts.forEach(product => {
-                const productCard = document.createElement('div');
-                productCard.className = 'product-card';
-                productCard.onclick = () => showProductDetail(product);
-                
-                productCard.innerHTML = `
-                    <img src="${product.imageUrl}" alt="${product.name}" class="product-image">
-                    <div class="product-info">
-                        <h3 class="product-title">${product.name}</h3>
-                    </div>
-                `;
-                
-                productGrid.appendChild(productCard);
-            });
-            
-            window.scrollTo(0, 0);
-        }
-
-        function showProductDetail(product) {
-            currentProduct = product;
-            homeView.style.display = 'none';
-            categoryView.style.display = 'none';
-            productView.style.display = 'block';
-            
-            // Set product info
-            document.getElementById('product-name').textContent = product.name;
-            document.getElementById('product-description').textContent = product.description;
-            document.getElementById('product-details').textContent = product.details;
-            
-            // Build carousel
-            productCarousel.innerHTML = '';
-            carouselControls.innerHTML = '';
-            carouselItems = [];
-            
-            // Add video if available
-            if (product.videoUrl) {
-                const videoItem = document.createElement('div');
-                videoItem.className = 'carousel-slide';
-                videoItem.innerHTML = `
-                    <iframe src="${product.videoUrl}" frameborder="0" allow="autoplay; fullscreen" allowfullscreen style="width: 100%; height: 100%;"></iframe>
-                `;
-                productCarousel.appendChild(videoItem);
-                carouselItems.push(videoItem);
-                
-                const indicator = document.createElement('div');
-                indicator.className = 'carousel-indicator';
-                indicator.onclick = () => setCarouselSlide(0);
-                carouselControls.appendChild(indicator);
-            }
-            
-            // Add image
-            if (product.imageUrl) {
-                const imageItem = document.createElement('div');
-                imageItem.className = 'carousel-slide';
-                imageItem.innerHTML = `<img src="${product.imageUrl}" alt="${product.name}" style="width: 100%; height: 100%; object-fit: cover;">`;
-                productCarousel.appendChild(imageItem);
-                carouselItems.push(imageItem);
-                
-                const indicator = document.createElement('div');
-                indicator.className = 'carousel-indicator';
-                indicator.onclick = () => setCarouselSlide(product.videoUrl ? 1 : 0);
-                carouselControls.appendChild(indicator);
-            }
-            
-            // Initialize carousel
-            currentCarouselIndex = 0;
-            updateCarousel();
-            
-            window.scrollTo(0, 0);
-        }
-
-        function setCarouselSlide(index) {
-            currentCarouselIndex = index;
-            updateCarousel();
-        }
-
-        function updateCarousel() {
-            carouselItems.forEach((slide, i) => {
-                if (i === currentCarouselIndex) {
-                    slide.classList.add('active');
-                } else {
-                    slide.classList.remove('active');
-                }
-            });
-            
-            const indicators = document.querySelectorAll('.carousel-indicator');
-            indicators.forEach((indicator, i) => {
-                if (i === currentCarouselIndex) {
-                    indicator.classList.add('active');
-                } else {
-                    indicator.classList.remove('active');
-                }
-            });
-        }
-
-        function nextSlide() {
-            if (carouselItems.length > 0) {
-                currentCarouselIndex = (currentCarouselIndex + 1) % carouselItems.length;
-                updateCarousel();
-            }
-        }
-
-        function prevSlide() {
-            if (carouselItems.length > 0) {
-                currentCarouselIndex = (currentCarouselIndex - 1 + carouselItems.length) % carouselItems.length;
-                updateCarousel();
-            }
-        }
-
-        function showOrderModal() {
-            orderModal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function hideOrderModal() {
-            orderModal.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
-
-        // Initialize
-        document.addEventListener('DOMContentLoaded', () => {
-            showHome();
-            
-            // Carousel navigation with keyboard arrows
-            document.addEventListener('keydown', (e) => {
-                if (productView.style.display !== 'block') return;
-                
-                if (carouselItems.length === 0) return;
-                
-                if (e.key === 'ArrowRight') {
-                    nextSlide();
-                } else if (e.key === 'ArrowLeft') {
-                    prevSlide();
-                }
-            });
-            
-            // Close modal when clicking outside
-            orderModal.addEventListener('click', (e) => {
-                if (e.target === orderModal) {
-                    hideOrderModal();
-                }
-            });
-        });
-    </script>
-</body>
-</html>
+                category: 'cardholders',
+                name: 'Bifold Card Holder',
+                description: 'A compact bifold design that offers more storage without adding bulk to your pocket.',
+                imageUrl: 'https://images.unsplash.com/photo-1627123424574-724758594e93?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80',
+                videoUrl: '',
+                details: 'Full-grain leather | 8 card slots | Central cash pocket | Dimensions: 10.5 x 7 cm'
+            },
+            {
+                id: 7,
+                category: 'cardholders',
+                name: 'Zippered Card Case',
+                description: 'Secure your cards with this zippered case that offers complete protection and style.',
+                imageUrl: 'https://images.unsplash.com/photo-1550555237-2cf2ef81d6d9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80',
+                videoUrl: '',
+                details: 'Genuine leather | Zippered closure | 6 card slots | Coin pocket | Dimensions: 11 x 7.5 cm'
+            },
+            {
+                id: 8,
+                category: 'cardholders',
+                name: 'Vintage Card Holder',
+                description: 'Aged leather with a distinctive patina that develops character over time with use.',
+                imageUrl: 'https://images.unsplash.com/photo-1627123424574-724758594e93?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80',
+                videoUrl: '',
+                details: 'Vintage leather | 4 card slots | Aged brass details | Dimensions: 9 x 6 cm'
+            },
+            {
+                id: 9,
+                category: 'cardholders',
+                name: 'Modern Card Wallet',
+                description: 'Contemporary design with innovative materials and construction techniques.',
+                imageUrl: 'https://images.unsplash.com/photo-1550555237-2cf2ef81d6d9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80',
+                videoUrl: '',
+                details: 'Innovative materials | 6 card slots | Slim profile | Dimensions: 9 x 6 cm'
+            },
+            {
+                id: 10,
+                category: 'cardholders',
+                name: 'Luxury Card Case',
+                description: 'Exquisite craftsmanship with attention to every detail for the discerning customer.',
+                imageUrl: 'https://images.unsplash.com/photo-1627123424574-724758594e93?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80',
+                videoUrl: '',
+                details: 'Premium materials | Hand-stitched | 6 card slots | Luxury packaging | Dimensions: 9 x 6 cm'
+            },
+            {
+                id: 11,
+                category: 'cardholders',
+                name: 'Travel Card Holder',
+                description: 'Designed for the frequent traveler with dedicated compartments for different card types.',
+                imageUrl: 'https://images.unsplash.com/photo-1550555237-2cf2ef81d6d9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80',
+                videoUrl: '',
+                details: 'Durable leather | 8 card slots | Passport slot | Dimensions: 11 x 8 cm'
+            },
+            {
+                id: 12,
+                category: 'cardholders',
+                name: 'Business Card Holder',
+                description: 'Professional design perfect for carrying business cards alongside your payment cards.',
+                imageUrl: 'https://images.unsplash.com/photo-1627123424574-724758594e93?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80',
+                videoUrl: '',
+                details: 'Professional design | 4 card slots | Business card compartment | Dimensions: 9.5 x 6.5 cm'
+            },
+            {
+                id: 13,
+                category: 'cardholders',
+                name: 'RFID Blocking Card Case',
+                description: 'Advanced protection against electronic theft with RFID blocking technology.',
+                imageUrl: 'https://images.unsplash.com/photo-1550555237-2cf2ef81d6d9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80',
+                videoUrl: '',
+                details: 'RFID protection | 6 card slots | Premium leather | Dimensions: 9 x 6 cm'
+            },
+            {
+                id: 14,
+                category: 'cardholders',
+                name: 'Designer Card Holder',
+                description: 'Signature design with unique elements that make a statement of personal style.',
+                imageUrl: 'https://images.unsplash.com/photo-1627123424574-724758594e93?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80',
+                videoUrl: '',
+                details: 'Signature design | 4-6 card capacity | Unique detailing | Dimensions: 9 x 6 cm'
+            },
+            {
+                id: 15,
+                category: 'cardholders',
+                name: 'Heritage Card Wallet',
+                description: 'Traditional craftsmanship techniques passed down through generations of artisans.',
+                imageUrl: 'https://images.unsplash.com/photo-1550555237-2cf2ef81d6d9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80',
+                videoUrl: '',
+                details: 'Traditional craftsmanship | 6 card slots | Heritage materials | Dimensions: 9 x 6 cm'
+            },
+            {
+                id: 16,
+                category: 'cardholders',
+                name: 'Sports Card Holder',
+                description: 'Durable and functional design for active lifestyles, with secure closure mechanisms.',
+                imageUrl: 'https://images.unsplash.com/photo-1627123424574-724758594e93?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80',
+                videoUrl: '',
+                details: 'Durable materials | Secure closure | 4 card slots | Dimensions: 9 x 6 cm'
+            },
+            {
+                id: 17
