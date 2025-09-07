@@ -533,6 +533,82 @@
             font-size: 0.9rem;
         }
         
+        /* New additions */
+        .search-container {
+            margin: 20px auto;
+            max-width: 500px;
+            position: relative;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 12px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 50px;
+            color: var(--white);
+            font-family: 'Poppins', sans-serif;
+            padding-left: 45px;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+        }
+        
+        .search-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gold);
+        }
+        
+        .price-tag {
+            display: inline-block;
+            background: rgba(212, 175, 55, 0.1);
+            color: var(--gold);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+        
+        .loading-spinner {
+            display: none;
+            text-align: center;
+            padding: 30px;
+        }
+        
+        .spinner {
+            border: 4px solid rgba(212, 175, 55, 0.3);
+            border-radius: 50%;
+            border-top: 4px solid var(--gold);
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .empty-state i {
+            font-size: 3rem;
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+        
         /* Responsive Styles */
         @media (max-width: 768px) {
             .logo {
@@ -587,6 +663,11 @@
                 height: 50px;
                 font-size: 1.2rem;
             }
+            
+            .search-container {
+                margin: 15px auto;
+                width: 90%;
+            }
         }
     </style>
 </head>
@@ -603,6 +684,12 @@
                 <button class="nav-btn" onclick="showCategory('wallets')">Wallets</button>
                 <button class="nav-btn" onclick="showCategory('longwallets')">Long Wallets</button>
             </nav>
+            
+            <!-- Search Bar -->
+            <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" id="search-input" class="search-input" placeholder="Search products..." oninput="filterProducts()">
+            </div>
         </div>
     </header>
 
@@ -642,6 +729,19 @@
                     <i class="fas fa-arrow-left"></i> Back to Categories
                 </button>
                 <div id="product-grid" class="product-grid"></div>
+                
+                <!-- Loading Spinner -->
+                <div id="loading-spinner" class="loading-spinner">
+                    <div class="spinner"></div>
+                    <p>Loading products...</p>
+                </div>
+                
+                <!-- Empty State -->
+                <div id="empty-state" class="empty-state" style="display: none;">
+                    <i class="fas fa-search"></i>
+                    <h3>No products found</h3>
+                    <p>Try adjusting your search or browse our categories</p>
+                </div>
             </div>
 
             <!-- Product View -->
@@ -671,6 +771,7 @@
                     <h2 id="product-name" class="product-name"></h2>
                     <p id="product-description" class="product-description"></p>
                     <p id="product-details" class="product-specs"></p>
+                    <span id="product-price" class="price-tag"></span>
                 </div>
 
                 <button onclick="showOrderModal()" class="order-btn">
@@ -719,7 +820,7 @@
     </footer>
 
     <script>
-        // Product Data Array
+        // Enhanced Product Data Array with prices
         const products = [
             {
                 id: 1,
@@ -728,7 +829,8 @@
                 description: 'Our signature slim card case, crafted from the finest Italian leather, designed to carry your essential cards with minimalist elegance.',
                 imageUrl: 'https://images.unsplash.com/photo-1550555237-2cf2ef81d6d9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80',
                 videoUrl: 'https://player.vimeo.com/video/370756467?background=1',
-                details: 'Genuine Italian leather | Hand-stitched edges | 4 card slots | RFID protection | Dimensions: 8.5 x 5.5 cm'
+                details: 'Genuine Italian leather | Hand-stitched edges | 4 card slots | RFID protection | Dimensions: 8.5 x 5.5 cm',
+                price: '$49.99'
             },
             {
                 id: 2,
@@ -737,7 +839,8 @@
                 description: 'A sophisticated card holder with a money clip, perfect for the modern professional who values both style and functionality.',
                 imageUrl: 'https://images.unsplash.com/photo-1627123424574-724758594e93?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80',
                 videoUrl: 'https://player.vimeo.com/video/370756467?background=1',
-                details: 'Premium calf leather | Stainless steel money clip | 6 card slots | Hand-finished edges | Dimensions: 9 x 6 cm'
+                details: 'Premium calf leather | Stainless steel money clip | 6 card slots | Hand-finished edges | Dimensions: 9 x 6 cm',
+                price: '$59.99'
             },
             {
                 id: 3,
@@ -746,7 +849,8 @@
                 description: 'The timeless billfold wallet, featuring multiple compartments for cards and cash, embodying traditional craftsmanship with modern sensibilities.',
                 imageUrl: 'https://images.unsplash.com/photo-1550581190-9a1bd5aebed5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80',
                 videoUrl: 'https://player.vimeo.com/video/370756467?background=1',
-                details: 'Full-grain leather | 8 card slots | 2 bill compartments | Hand-stitched seams | Dimensions: 10.5 x 9 cm when closed'
+                details: 'Full-grain leather | 8 card slots | 2 bill compartments | Hand-stitched seams | Dimensions: 10.5 x 9 cm when closed',
+                price: '$79.99'
             },
             {
                 id: 4,
@@ -755,7 +859,8 @@
                 description: 'A contemporary wallet with a secure zipper closure, offering ample storage while maintaining a sleek profile.',
                 imageUrl: 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80',
                 videoUrl: 'https://player.vimeo.com/video/370756467?background=1',
-                details: 'Vegetable-tanned leather | YKK zipper | 12 card slots | Coin compartment | Dimensions: 11 x 9.5 cm when closed'
+                details: 'Vegetable-tanned leather | YKK zipper | 12 card slots | Coin compartment | Dimensions: 11 x 9.5 cm when closed',
+                price: '$89.99'
             },
             {
                 id: 5,
@@ -764,7 +869,8 @@
                 description: 'An elegant long wallet designed to securely hold your passport, cards, and travel documents with refined organization.',
                 imageUrl: 'https://images.unsplash.com/photo-1625124380636-6bcb5898732e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80',
                 videoUrl: 'https://player.vimeo.com/video/370756467?background=1',
-                details: 'Luxury pebbled leather | Passport slot | 10 card slots | 2 bill compartments | Dimensions: 19 x 10 cm when closed'
+                details: 'Luxury pebbled leather | Passport slot | 10 card slots | 2 bill compartments | Dimensions: 19 x 10 cm when closed',
+                price: '$99.99'
             },
             {
                 id: 6,
@@ -773,7 +879,8 @@
                 description: 'A distinguished long wallet with checkbook capacity, offering generous storage without compromising on sophistication.',
                 imageUrl: 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80',
                 videoUrl: 'https://player.vimeo.com/video/370756467?background=1',
-                details: 'Top-grain leather | Checkbook slot | 8 card slots | 3 bill compartments | Dimensions: 20 x 10.5 cm when closed'
+                details: 'Top-grain leather | Checkbook slot | 8 card slots | 3 bill compartments | Dimensions: 20 x 10.5 cm when closed',
+                price: '$109.99'
             }
         ];
 
@@ -791,12 +898,16 @@
         const productCarousel = document.getElementById('product-carousel');
         const orderModal = document.getElementById('order-modal');
         const carouselControls = document.querySelector('.carousel-controls');
+        const searchInput = document.getElementById('search-input');
+        const loadingSpinner = document.getElementById('loading-spinner');
+        const emptyState = document.getElementById('empty-state');
 
         // View Management Functions
         function showHome() {
             homeView.style.display = 'grid';
             categoryView.style.display = 'none';
             productView.style.display = 'none';
+            searchInput.value = '';
             window.scrollTo(0, 0);
         }
 
@@ -806,24 +917,40 @@
             categoryView.style.display = 'block';
             productView.style.display = 'none';
             
-            // Filter and display products
-            productGrid.innerHTML = '';
-            const categoryProducts = products.filter(p => p.category === category);
+            // Show loading spinner
+            loadingSpinner.style.display = 'block';
+            emptyState.style.display = 'none';
             
-            categoryProducts.forEach(product => {
-                const productCard = document.createElement('div');
-                productCard.className = 'product-card';
-                productCard.onclick = () => showProductDetail(product);
+            // Simulate loading delay for better UX
+            setTimeout(() => {
+                // Filter and display products
+                productGrid.innerHTML = '';
+                const categoryProducts = products.filter(p => p.category === category);
                 
-                productCard.innerHTML = `
-                    <img src="${product.imageUrl}" alt="${product.name}" class="product-image">
-                    <div class="product-info">
-                        <h3 class="product-title">${product.name}</h3>
-                    </div>
-                `;
+                if (categoryProducts.length === 0) {
+                    emptyState.style.display = 'block';
+                    loadingSpinner.style.display = 'none';
+                    return;
+                }
                 
-                productGrid.appendChild(productCard);
-            });
+                categoryProducts.forEach(product => {
+                    const productCard = document.createElement('div');
+                    productCard.className = 'product-card';
+                    productCard.onclick = () => showProductDetail(product);
+                    
+                    productCard.innerHTML = `
+                        <img src="${product.imageUrl}" alt="${product.name}" class="product-image">
+                        <div class="product-info">
+                            <h3 class="product-title">${product.name}</h3>
+                            <span class="price-tag">${product.price}</span>
+                        </div>
+                    `;
+                    
+                    productGrid.appendChild(productCard);
+                });
+                
+                loadingSpinner.style.display = 'none';
+            }, 500);
             
             window.scrollTo(0, 0);
         }
@@ -838,6 +965,7 @@
             document.getElementById('product-name').textContent = product.name;
             document.getElementById('product-description').textContent = product.description;
             document.getElementById('product-details').textContent = product.details;
+            document.getElementById('product-price').textContent = product.price;
             
             // Build carousel
             productCarousel.innerHTML = '';
@@ -928,6 +1056,33 @@
             orderModal.classList.remove('active');
             document.body.style.overflow = 'auto';
         }
+        
+        // Search functionality
+        function filterProducts() {
+            const searchTerm = searchInput.value.toLowerCase();
+            
+            if (categoryView.style.display !== 'block') return;
+            
+            const allProducts = document.querySelectorAll('.product-card');
+            let visibleCount = 0;
+            
+            allProducts.forEach(card => {
+                const title = card.querySelector('.product-title').textContent.toLowerCase();
+                if (title.includes(searchTerm)) {
+                    card.style.display = 'block';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            
+            // Show empty state if no products match
+            if (visibleCount === 0 && searchTerm !== '') {
+                emptyState.style.display = 'block';
+            } else {
+                emptyState.style.display = 'none';
+            }
+        }
 
         // Initialize
         document.addEventListener('DOMContentLoaded', () => {
@@ -943,6 +1098,8 @@
                     nextSlide();
                 } else if (e.key === 'ArrowLeft') {
                     prevSlide();
+                } else if (e.key === 'Escape') {
+                    hideOrderModal();
                 }
             });
             
@@ -950,6 +1107,13 @@
             orderModal.addEventListener('click', (e) => {
                 if (e.target === orderModal) {
                     hideOrderModal();
+                }
+            });
+            
+            // Search on Enter key
+            searchInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    filterProducts();
                 }
             });
         });
