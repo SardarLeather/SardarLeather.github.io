@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sardar Leather | Luxury Leather Goods</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --gold: #D4AF37;
+            --dark-gold: #B8941F;
+            --black: #121212;
+            --dark-gray: #1E1E1E;
+            --light-gray: #2C2C2C;
+            --white: #FFFFFF;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--black);
+            color: var(--white);
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(212, 175, 55, 0.03) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(212, 175, 55, 0.03) 0%, transparent 20%);
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            padding: 30px 0;
+            text-align: center;
+            background: linear-gradient(to bottom, rgba(18, 18, 18, 0.95) 0%, rgba(18, 18, 18, 0.9) 100%);
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        
+        .logo-container {
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .logo-container::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+        
+        .logo {
+            height: 80px;
+            filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.3));
+        }
+        
+        .tagline {
+            color: var(--gold);
+            font-style: italic;
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+            text-shadow: 0 0 5px rgba(212, 175, 55, 0.3);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .nav-btn {
+            color: var(--gold);
+            font-family: 'Cinzel', serif;
+            font-weight: 600;
+            background: transparent;
+            border: none;
+            padding: 12px 25px;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        
+        .nav-btn::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background-color: var(--gold);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-btn:hover::before {
+            width: 80%;
+        }
+        
+        .nav-btn:hover {
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.7);
+        }
+        
+        /* Main Content Styles */
+        main {
+            padding: 50px 0;
+            min-height: calc(100vh - 300px);
+        }
+        
+        /* Home View */
+        .home-view {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 30px;
+        }
+        
+        .category-card {
+            cursor: pointer;
+            transition: all 0.4s ease;
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            height: 380px;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(212, 175, 55, 0.2);
+        }
+        
+        .category-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .category-card:hover .category-image {
+            transform: scale(1.05);
+        }
+        
+        .category-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .category-name {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .view-products {
+            color: var(--white);
+            font-size: 0.9rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .category-card:hover .view-products {
+            opacity: 1;
+        }
+        
+        /* Category View */
+        .category-view {
+            display: none;
+        }
+        
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            color: var(--gold);
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid var(--gold);
+            padding: 10px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+            font-size: 1rem;
+        }
+        
+        .back-btn:hover {
+            background: rgba(212, 175, 55, 0.2);
+            transform: translateX(-5px);
+        }
+        
+        .back-btn i {
+            margin-right: 8px;
+        }
+        
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .product-card {
+            background: var(--dark-gray);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.2);
+        }
+        
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .product-card:hover::before {
+            opacity: 1;
+        }
+        
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .product-info {
+            padding: 20px;
+        }
+        
+        .product-title {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        
+        /* Product View */
+        .product-view {
+            display: none;
+        }
+        
+        .carousel-container {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            height: 400px;
+        }
+        
+        .carousel-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        
+        .carousel-slide.active {
+            opacity: 1;
+        }
+        
+        .carousel-slide video,
+        .carousel-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .carousel-controls {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            z-index: 10;
+        }
+        
+        .carousel-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .carousel-indicator.active {
+            background: var(--gold);
+            transform: scale(1.2);
+        }
+        
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: var(--gold);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s ease;
+        }
+        
+        .carousel-nav:hover {
+            background: rgba(212, 175, 55, 0.2);
+        }
+        
+        .carousel-prev {
+            left: 20px;
+        }
+        
+        .carousel-next {
+            right: 20px;
+        }
+        
+        .product-details {
+            padding: 20px;
+            background: var(--dark-gray);
+            border-radius: 10px;
+            margin-bottom: 80px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .product-name {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 2rem;
+            margin-bottom: 15px;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+            padding-bottom: 10px;
+        }
+        
+        .product-description {
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .product-specs {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        
+        .order-btn {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, var(--gold), var(--dark-gold));
+            color: var(--black);
+            font-weight: 600;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.4);
+            transition: all 0.3s ease;
+            z-index: 100;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+        }
+        
+        .order-btn:hover {
+            transform: translateX(-50%) translateY(-3px);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.5);
+        }
+        
+        /* Order Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal-content {
+            background: var(--dark-gray);
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            border: 1px solid var(--gold);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            color: var(--gold);
+            background: transparent;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .close-modal:hover {
+            transform: rotate(90deg);
+        }
+        
+        .modal-title {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+        }
+        
+        .platforms {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .platform {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .platform:hover {
+            transform: translateY(-5px);
+        }
+        
+        .platform-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+            color: var(--black);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+        }
+        
+        .platform-name {
+            color: var(--white);
+            font-size: 0.9rem;
+        }
+        
+        .modal-note {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            margin-top: 20px;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark-gray);
+            padding: 30px 0;
+            text-align: center;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        
+        .footer-text {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .logo {
+                height: 60px;
+            }
+            
+            .tagline {
+                font-size: 0.9rem;
+                padding: 0 15px;
+            }
+            
+            nav {
+                gap: 15px;
+            }
+            
+            .nav-btn {
+                font-size: 0.9rem;
+                padding: 10px 15px;
+            }
+            
+            .home-view {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+            
+            .category-card {
+                height: 320px;
+            }
+            
+            .category-image {
+                height: 250px;
+            }
+            
+            .product-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+            
+            .carousel-container {
+                height: 300px;
+            }
+            
+            .product-name {
+                font-size: 1.5rem;
+            }
+            
+            .platforms {
+                gap: 15px;
+            }
+            
+            .platform-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <div class="logo-container">
+                <img src="https://via.placeholder.com/160x80/121212/D4AF37?text=Sardar+Leather" alt="Sardar Leather Logo" class="logo">
+            </div>
+            <p class="tagline">Discover the unparalleled elegance of our bespoke leather collection, where every stitch tells a story of refined craftsmanship.</p>
+            <nav>
+                <button class="nav-btn" onclick="showCategory('cardholders')">Card Holders</button>
+                <button class="nav-btn" onclick="showCategory('wallets')">Wallets</button>
+                <button class="nav-btn" onclick="showCategory('longwallets')">Long Wallets</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <div class="container">
+            <!-- Home View -->
+            <div id="home-view" class="home-view">
+                <div class="category-card" onclick="showCategory('cardholders')">
+                    <img src="https://images.unsplash.com/photo-1627123424574-724758594e93?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80" alt="Card Holders" class="category-image">
+                    <div class="category-overlay">
+                        <h3 class="category-name">Card Holders</h3>
+                        <p class="view-products">View Collection</p>
+                    </div>
+                </div>
+                
+                <div class="category-card" onclick="showCategory('wallets')">
+                    <img src="https://images.unsplash.com/photo-1550581190-9a1bd5aebed5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80" alt="Wallets" class="category-image">
+                    <div class="category-overlay">
+                        <h3 class="category-name">Wallets</h3>
+                        <p class="view-products">View Collection</p>
+                    </div>
+                </div>
+                
+                <div class="category-card" onclick="showCategory('longwallets')">
+                    <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80" alt="Long Wallets" class="category-image">
+                    <div class="category-overlay">
+                        <h3 class="category-name">Long Wallets</h3>
+                        <p class="view-products">View Collection</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Category View -->
+            <div id="category-view" class="category-view">
+                <button class="back-btn" onclick="showHome()">
+                    <i class="fas fa-arrow-left"></i> Back to Categories
+                </button>
+                <div id="product-grid" class="product-grid"></div>
+            </div>
+
+            <!-- Product View -->
+            <div id="product-view" class="product-view">
+                <button class="back-btn" onclick="showCategory(currentCategory)">
+                    <i class="fas fa-arrow-left"></i> Back to Products
+                </button>
+                
+                <div class="carousel-container">
+                    <div id="product-carousel" class="carousel-inner">
+                        <!-- Carousel items will be inserted here -->
+                    </div>
+                    
+                    <div class="carousel-nav carousel-prev" onclick="prevSlide()">
+                        <i class="fas fa-chevron-left"></i>
+                    </div>
+                    <div class="carousel-nav carousel-next" onclick="nextSlide()">
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                    
+                    <div class="carousel-controls">
+                        <!-- Indicators will be inserted here -->
+                    </div>
+                </div>
+
+                <div class="product-details">
+                    <h2 id="product-name" class="product-name"></h2>
+                    <p id="product-description" class="product-description"></p>
+                    <p id="product-details" class="product-specs"></p>
+                </div>
+
+                <button onclick="showOrderModal()" class="order-btn">
+                    ORDER NOW <i class="fas fa-arrow-right" style="margin-left: 8px;"></i>
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Order Modal -->
+    <div id="order-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="close-modal" onclick="hideOrderModal()">
+                <i class="fas fa-times"></i>
+            </button>
+            <h3 class="modal-title">Contact us to order via:</h3>
+            <div class="platforms">
+                <a href="https://t.me/yourusername" target="_blank" class="platform">
+                    <div class="platform-icon">
+                        <i class="fab fa-telegram"></i>
+                    </div>
+                    <span class="platform-name">Telegram</span>
+                </a>
+                <a href="https://wa.me/yournumber" target="_blank" class="platform">
+                    <div class="platform-icon">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <span class="platform-name">WhatsApp</span>
+                </a>
+                <a href="https://eitaa.com/yourusername" target="_blank" class="platform">
+                    <div class="platform-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <span class="platform-name">Eitaa</span>
+                </a>
+            </div>
+            <p class="modal-note">We typically respond within a few hours</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p class="footer-text">© 2023 Sardar Leather. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Product Data Array
+        const products = [
+            {
+                id: 1,
+                category: 'cardholders',
+                name: 'Slim Card Case',
+                description: 'Our signature slim card case, crafted from the finest Italian leather, designed to carry your essential cards with minimalist elegance.',
+                imageUrl: 'https://images.unsplash.com/photo-1550555237-2cf2ef81d6d9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80',
+                videoUrl: 'https://player.vimeo.com/video/370756467?background=1',
+                details: 'Genuine Italian leather | Hand-stitched edges | 4 card slots | RFID protection | Dimensions: 8.5 x 5.5 cm'
+            },
+            {
+                id: 2,
+                category: 'cardholders',
+                name: 'Executive Card Holder',
+                description: 'A sophisticated card holder with a money clip, perfect for the modern professional who values both style and functionality.',
+                imageUrl: 'https://images.unsplash.com/photo-1627123424574-724758594e93?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80',
+                videoUrl: 'https://player.vimeo.com/video/370756467?background=1',
+                details: 'Premium calf leather | Stainless steel money clip | 6 card slots | Hand-finished edges | Dimensions: 9 x 6 cm'
+            },
+            {
+                id: 3,
+                category: 'wallets',
+                name: 'Classic Billfold',
+                description: 'The timeless billfold wallet, featuring multiple compartments for cards and cash, embodying traditional craftsmanship with modern sensibilities.',
+                imageUrl: 'https://images.unsplash.com/photo-1550581190-9a1bd5aebed5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80',
+                videoUrl: 'https://player.vimeo.com/video/370756467?background=1',
+                details: 'Full-grain leather | 8 card slots | 2 bill compartments | Hand-stitched seams | Dimensions: 10.5 x 9 cm when closed'
+            },
+            {
+                id: 4,
+                category: 'wallets',
+                name: 'Modern Zip Wallet',
+                description: 'A contemporary wallet with a secure zipper closure, offering ample storage while maintaining a sleek profile.',
+                imageUrl: 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80',
+                videoUrl: 'https://player.vimeo.com/video/370756467?background=1',
+                details: 'Vegetable-tanned leather | YKK zipper | 12 card slots | Coin compartment | Dimensions: 11 x 9.5 cm when closed'
+            },
+            {
+                id: 5,
+                category: 'longwallets',
+                name: 'Passport Wallet',
+                description: 'An elegant long wallet designed to securely hold your passport, cards, and travel documents with refined organization.',
+                imageUrl: 'https://images.unsplash.com/photo-1625124380636-6bcb5898732e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80',
+                videoUrl: 'https://player.vimeo.com/video/370756467?background=1',
+                details: 'Luxury pebbled leather | Passport slot | 10 card slots | 2 bill compartments | Dimensions: 19 x 10 cm when closed'
+            },
+            {
+                id: 6,
+                category: 'longwallets',
+                name: 'Checkbook Wallet',
+                description: 'A distinguished long wallet with checkbook capacity, offering generous storage without compromising on sophistication.',
+                imageUrl: 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80',
+                videoUrl: 'https://player.vimeo.com/video/370756467?background=1',
+                details: 'Top-grain leather | Checkbook slot | 8 card slots | 3 bill compartments | Dimensions: 20 x 10.5 cm when closed'
+            }
+        ];
+
+        // State variables
+        let currentCategory = '';
+        let currentProduct = null;
+        let currentCarouselIndex = 0;
+        let carouselItems = [];
+
+        // DOM Elements
+        const homeView = document.getElementById('home-view');
+        const categoryView = document.getElementById('category-view');
+        const productView = document.getElementById('product-view');
+        const productGrid = document.getElementById('product-grid');
+        const productCarousel = document.getElementById('product-carousel');
+        const orderModal = document.getElementById('order-modal');
+        const carouselControls = document.querySelector('.carousel-controls');
+
+        // View Management Functions
+        function showHome() {
+            homeView.style.display = 'grid';
+            categoryView.style.display = 'none';
+            productView.style.display = 'none';
+            window.scrollTo(0, 0);
+        }
+
+        function showCategory(category) {
+            currentCategory = category;
+            homeView.style.display = 'none';
+            categoryView.style.display = 'block';
+            productView.style.display = 'none';
+            
+            // Filter and display products
+            productGrid.innerHTML = '';
+            const categoryProducts = products.filter(p => p.category === category);
+            
+            categoryProducts.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.className = 'product-card';
+                productCard.onclick = () => showProductDetail(product);
+                
+                productCard.innerHTML = `
+                    <img src="${product.imageUrl}" alt="${product.name}" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-title">${product.name}</h3>
+                    </div>
+                `;
+                
+                productGrid.appendChild(productCard);
+            });
+            
+            window.scrollTo(0, 0);
+        }
+
+        function showProductDetail(product) {
+            currentProduct = product;
+            homeView.style.display = 'none';
+            categoryView.style.display = 'none';
+            productView.style.display = 'block';
+            
+            // Set product info
+            document.getElementById('product-name').textContent = product.name;
+            document.getElementById('product-description').textContent = product.description;
+            document.getElementById('product-details').textContent = product.details;
+            
+            // Build carousel
+            productCarousel.innerHTML = '';
+            carouselControls.innerHTML = '';
+            carouselItems = [];
+            
+            // Add video if available
+            if (product.videoUrl) {
+                const videoItem = document.createElement('div');
+                videoItem.className = 'carousel-slide';
+                videoItem.innerHTML = `
+                    <iframe src="${product.videoUrl}" frameborder="0" allow="autoplay; fullscreen" allowfullscreen style="width: 100%; height: 100%;"></iframe>
+                `;
+                productCarousel.appendChild(videoItem);
+                carouselItems.push(videoItem);
+                
+                const indicator = document.createElement('div');
+                indicator.className = 'carousel-indicator';
+                indicator.onclick = () => setCarouselSlide(0);
+                carouselControls.appendChild(indicator);
+            }
+            
+            // Add image
+            if (product.imageUrl) {
+                const imageItem = document.createElement('div');
+                imageItem.className = 'carousel-slide';
+                imageItem.innerHTML = `<img src="${product.imageUrl}" alt="${product.name}" style="width: 100%; height: 100%; object-fit: cover;">`;
+                productCarousel.appendChild(imageItem);
+                carouselItems.push(imageItem);
+                
+                const indicator = document.createElement('div');
+                indicator.className = 'carousel-indicator';
+                indicator.onclick = () => setCarouselSlide(product.videoUrl ? 1 : 0);
+                carouselControls.appendChild(indicator);
+            }
+            
+            // Initialize carousel
+            currentCarouselIndex = 0;
+            updateCarousel();
+            
+            window.scrollTo(0, 0);
+        }
+
+        function setCarouselSlide(index) {
+            currentCarouselIndex = index;
+            updateCarousel();
+        }
+
+        function updateCarousel() {
+            carouselItems.forEach((slide, i) => {
+                if (i === currentCarouselIndex) {
+                    slide.classList.add('active');
+                } else {
+                    slide.classList.remove('active');
+                }
+            });
+            
+            const indicators = document.querySelectorAll('.carousel-indicator');
+            indicators.forEach((indicator, i) => {
+                if (i === currentCarouselIndex) {
+                    indicator.classList.add('active');
+                } else {
+                    indicator.classList.remove('active');
+                }
+            });
+        }
+
+        function nextSlide() {
+            if (carouselItems.length > 0) {
+                currentCarouselIndex = (currentCarouselIndex + 1) % carouselItems.length;
+                updateCarousel();
+            }
+        }
+
+        function prevSlide() {
+            if (carouselItems.length > 0) {
+                currentCarouselIndex = (currentCarouselIndex - 1 + carouselItems.length) % carouselItems.length;
+                updateCarousel();
+            }
+        }
+
+        function showOrderModal() {
+            orderModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function hideOrderModal() {
+            orderModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            showHome();
+            
+            // Carousel navigation with keyboard arrows
+            document.addEventListener('keydown', (e) => {
+                if (productView.style.display !== 'block') return;
+                
+                if (carouselItems.length === 0) return;
+                
+                if (e.key === 'ArrowRight') {
+                    nextSlide();
+                } else if (e.key === 'ArrowLeft') {
+                    prevSlide();
+                }
+            });
+            
+            // Close modal when clicking outside
+            orderModal.addEventListener('click', (e) => {
+                if (e.target === orderModal) {
+                    hideOrderModal();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
