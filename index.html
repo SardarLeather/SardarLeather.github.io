@@ -720,9 +720,10 @@
 
     <script>
         // Product Data Array
-        const products = [
-            // Card Holders (19 products)
-           {
+      // Product Data Array
+const products = [
+    // Card Holders (19 products)
+    {
         id: 1,
         category: 'cardholders',
         name: 'CH1 Executive Card Holder',
@@ -731,7 +732,7 @@
         videoUrl: 'YOUR_VIDEO_URL_OR_EMPTY',
         details: 'Full-grain Italian leather | Hand-stitched edges | 6 card slots | RFID protection '
     },
-{
+    {
         id: 2,
         category: 'cardholders',
         name: 'CH2 Leather Card Case',
@@ -740,7 +741,7 @@
         videoUrl: 'YOUR_VIDEO_URL_OR_EMPTY',
         details: 'Vegetable-tanned leather | 4 card slots | Slim profile '
     },
-{
+    {
         id: 3,
         category: 'cardholders',
         name: 'CH3 Classic Card Holder',
@@ -749,7 +750,7 @@
         videoUrl: 'YOUR_VIDEO_URL_OR_EMPTY',
         details: 'Full-grain leather | 8 card slots | Cash compartment' 
     },
-   {
+    {
         id: 4,
         category: 'cardholders',
         name: 'CH4 Minimalist Card Holder',
@@ -758,7 +759,7 @@
         videoUrl: 'YOUR_VIDEO_URL_OR_EMPTY',
         details: 'Top-grain leather | 3 card slots | Ultra-slim design '
     },
- {
+    {
         id: 5,
         category: 'cardholders',
         name: 'CH7 Luxury Card Case',
@@ -767,7 +768,7 @@
         videoUrl: 'YOUR_VIDEO_URL_OR_EMPTY',
         details: 'Bridle leather | 6 card slots | Luxury packaging '
     },
-{
+    {
         id: 6,
         category: 'cardholders',
         name: 'CH9 Card Holder',
@@ -776,7 +777,7 @@
         videoUrl: 'YOUR_VIDEO_URL_OR_EMPTY',
         details: 'Aged leather | 4 card slots | Vintage brass details '
     },
- {
+    {
         id: 7,
         category: 'cardholders',
         name: 'CH10 Card Case',
@@ -785,7 +786,7 @@
         videoUrl: 'YOUR_VIDEO_URL_OR_EMPTY',
         details: 'Genuine leather | Premium Touch | Multiple card slots | RFID protection '
     },
- {
+    {
         id: 8,
         category: 'cardholders',
         name: 'CH11 Business Card Holder',
@@ -794,7 +795,7 @@
         videoUrl: 'YOUR_VIDEO_URL_OR_EMPTY',
         details: 'Premium leather | 4 card slots | Business card compartment | Hand-stitched '
     },
-  {
+    {
         id: 9,
         category: 'cardholders',
         name: 'CH13 Bear Card Case',
@@ -803,7 +804,8 @@
         videoUrl: 'YOUR_VIDEO_URL_OR_EMPTY',
         details: 'Quality leather | RFID protection | 6 card slots '
     },
-  id: 10,
+    {
+        id: 10,
         category: 'cardholders',
         name: 'CH14 Designer Card Holder',
         description: 'Handcrafted from premium leather with unique design elements. The reinforced stitching ensures structural integrity that mass production cannot replicate.',
@@ -811,7 +813,7 @@
         videoUrl: 'YOUR_VIDEO_URL_OR_EMPTY',
         details: 'Premium leather | 4-6 card capacity | Unique detailing' 
     },
-  {
+    {
         id: 11,
         category: 'cardholders',
         name: 'CH15 Unique Card Wallet',
@@ -820,16 +822,16 @@
         videoUrl: 'YOUR_VIDEO_URL_OR_EMPTY',
         details: 'Traditional craftsmanship | 6 card slots | Unique detailing ' 
     },
-  {
+    {
         id: 12,
         category: 'cardholders',
-        name: 'CH-012 Travel Card Holder',
+        name: 'CH16 Travel Card Holder',
         description: 'Crafted from durable leather that\'s naturally resistant to wear and tear. Designed for the frequent traveler who values both style and functionality.',
         imageUrl: 'https://SardarLeather.github.io/images/CH16(1) black.png',
         videoUrl: 'YOUR_VIDEO_URL_OR_EMPTY',
         details: 'Durable leather | 8 card slots | Premium leather'
     },
- {
+    {
         id: 13,
         category: 'cardholders',
         name: 'CH18 Card Holder',
@@ -838,7 +840,7 @@
         videoUrl: 'YOUR_VIDEO_URL_OR_EMPTY',
         details: 'Tough leather | Secure closure | 4 card slots | Premium leather'
     },
- {
+    {
         id: 14,
         category: 'cardholders',
         name: 'CH19 Premium Bifold Card Holder',
@@ -847,7 +849,7 @@
         videoUrl: 'YOUR_VIDEO_URL_OR_EMPTY',
         details: 'Full-grain leather | 8 card slots | Central cash pocket | Premium leather'
     },
- {
+    {
         id: 15,
         category: 'cardholders',
         name: 'CH20 Modern Card Wallet',
@@ -856,7 +858,7 @@
         videoUrl: 'YOUR_VIDEO_URL_OR_EMPTY',
         details: 'Innovative materials | 6 card slots | Slim profile | Premium Leather'
     },
-  {
+    {
         id: 16,
         category: 'cardholders',
         name: 'CH21 Elegant Card Case',
@@ -865,7 +867,7 @@
         videoUrl: 'YOUR_VIDEO_URL_OR_EMPTY',
         details: 'Calf leather | 6 card slots | Hand-finished edges | Premium Leather'
     },
-  {
+    {
         id: 17,
         category: 'cardholders',
         name: 'CH22 Classic Card Holder',
@@ -874,7 +876,7 @@
         videoUrl: 'YOUR_VIDEO_URL_OR_EMPTY',
         details: 'Genuine leather | Premium touch | 6 card slots | Hand Stiched'
     },
- {
+    {
         id: 18,
         category: 'cardholders',
         name: 'CH23 Premium Card Holder',
@@ -883,7 +885,18 @@
         videoUrl: 'YOUR_VIDEO_URL_OR_EMPTY',
         details: 'Luxury leather | Signature design | 4-6 card capacity | Innovative materials'
     },
- {
+    {
+        id: 19,
+        category: 'cardholders',
+        name: 'CH24 Premium Card Organizer',
+        description: 'Made from top-quality leather with multiple compartments for organized storage. A one-time purchase that becomes part of your story.',
+        imageUrl: 'YOUR_IMAGE_URL',
+        videoUrl: 'YOUR_VIDEO_URL_OR_EMPTY',
+        details: 'Top-quality leather | Multiple compartments | Organized storage'
+    },
+
+    // Wallets (8 products)
+    {
         id: 20,
         category: 'wallets',
         name: 'W1 Classic Wallet',
@@ -892,7 +905,7 @@
         videoUrl: 'YOUR_VIDEO_URL_OR_EMPTY',
         details: 'Full-grain leather | 8 card slots | 1 bill compartment | Hand-stitched seams | Premium Quality'
     },
- {
+    {
         id: 21,
         category: 'wallets',
         name: 'W2 Leather Wallet',
@@ -901,7 +914,7 @@
         videoUrl: 'YOUR_VIDEO_URL_OR_EMPTY',
         details: 'Top-grain leather | 6 card slots | Slim design | Premium Touch'
     },
- {
+    {
         id: 22,
         category: 'wallets',
         name: 'W3 Tri-Fold Modern Wallet',
@@ -910,7 +923,7 @@
         videoUrl: 'YOUR_VIDEO_URL_OR_EMPTY',
         details: 'Premium leather | Tri-Fold | 12 card slots | Modern Design'
     },
- {
+    {
         id: 23,
         category: 'wallets',
         name: 'W4 Vintage Leather Wallet',
@@ -928,7 +941,7 @@
         videoUrl: 'YOUR_VIDEO_URL_OR_EMPTY',
         details: 'Bridle leather | 10 card slots | 1 bill compartment | Premium Quality'
     },
-  {
+    {
         id: 25,
         category: 'wallets',
         name: 'W6 RFID Protection Wallet',
@@ -946,7 +959,7 @@
         videoUrl: 'YOUR_VIDEO_URL_OR_EMPTY',
         details: 'Premium leather | 8 card slots | Unique design'
     },
- {
+    {
         id: 27,
         category: 'wallets',
         name: 'W8 Premium Wallet',
@@ -955,7 +968,9 @@
         videoUrl: 'YOUR_VIDEO_URL_OR_EMPTY',
         details: 'Durable leather | 10 card slots | Premium Quality| Multiple compartments'
     },
- {
+
+    // Long Wallets (6 products)
+    {
         id: 28,
         category: 'longwallets',
         name: 'LW1 Executive Long Wallet',
@@ -973,7 +988,7 @@
         videoUrl: 'YOUR_VIDEO_URL_OR_EMPTY',
         details: 'Full-grain leather | Mobile Slot | 10 card slots | Multiple bill compartment | premium leather'
     },
- {
+    {
         id: 30,
         category: 'longwallets',
         name: 'LW3 Premium Long Wallet',
@@ -985,20 +1000,28 @@
     {
         id: 31,
         category: 'longwallets',
-        name: 'LW5 Vintage Long Wallet',
+        name: 'LW4 Vintage Long Wallet',
         description: 'Made from aged leather that develops character over time, telling the story of your journey. A one-time purchase that eliminates the need for replacements.',
         imageUrl: 'https://SardarLeather.github.io/images/LW5 black.png',
         videoUrl: 'YOUR_VIDEO_URL_OR_EMPTY',
         details: 'Aged leather | 8 card slots | 2 bill compartments | Vintage finish'
     },
-   {
+    {
         id: 32,
         category: 'longwallets',
-        name: 'LW6 Designer Long Wallet',
+        name: 'LW5 Designer Long Wallet',
         description: 'Crafted from premium leather with unique design elements. The reinforced stitching ensures structural integrity that mass production cannot replicate.',
         imageUrl: 'https://SardarLeather.github.io/images/LW6 black.png',
         videoUrl: 'YOUR_VIDEO_URL_OR_EMPTY',
         details: 'Premium leather | 10 card slots | Unique design | Multiple compartments'
+    },
+    {
+        id: 33,
+        category: 'longwallets',
+        name: 'LW6 Luxury Long Wallet',
+        description: 'Handcrafted from the finest full-grain Italian leather with meticulous hand-stitching. This heirloom-quality piece is designed to last a lifetime.',
+        imageUrl: 'YOUR_IMAGE_URL',
+        videoUrl: 'YOUR_VIDEO_URL_OR_EMPTY',
+        details: 'Full-grain Italian leather | 12 card slots | 3 bill compartments | Checkbook slot'
     }
-   
 ];
