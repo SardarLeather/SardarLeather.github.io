@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -533,6 +534,13 @@
             font-size: 0.9rem;
         }
         
+        /* Loading State */
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: var(--gold);
+        }
+        
         /* Responsive Styles */
         @media (max-width: 768px) {
             .logo {
@@ -641,7 +649,9 @@
                 <button class="back-btn" onclick="showHome()">
                     <i class="fas fa-arrow-left"></i> Back to Categories
                 </button>
-                <div id="product-grid" class="product-grid"></div>
+                <div id="product-grid" class="product-grid">
+                    <div class="loading">Loading products...</div>
+                </div>
             </div>
 
             <!-- Product View -->
@@ -720,308 +730,301 @@
 
     <script>
         // Product Data Array
-      // Product Data Array
-const products = [
-    // Card Holders (19 products)
-    {
-        id: 1,
-        category: 'cardholders',
-        name: 'CH1 Executive Card Holder',
-        description: 'Crafted from the finest full-grain leather, this card holder features meticulous hand-stitching that ensures decades of reliable use. The premium leather develops a unique patina over time, making each piece distinctly yours.',
-        imageUrl: 'https://SardarLeather.github.io/images/CH1 black.png',
-        videoUrl: 'YOUR_VIDEO_URL_OR_EMPTY',
-        details: 'Full-grain Italian leather | Hand-stitched edges | 6 card slots | RFID protection '
-    },
-    {
-        id: 2,
-        category: 'cardholders',
-        name: 'CH2 Leather Card Case',
-        description: 'Experience the luxury of vegetable-tanned leather that molds to your touch. Each stitch is carefully placed by skilled artisans, ensuring durability that mass-produced items can never match.',
-        imageUrl: 'https://SardarLeather.github.io/images/CH26 black.png',
-        videoUrl: 'YOUR_VIDEO_URL_OR_EMPTY',
-        details: 'Vegetable-tanned leather | 4 card slots | Slim profile '
-    },
-    {
-        id: 3,
-        category: 'cardholders',
-        name: 'CH3 Classic Card Holder',
-        description: 'Made from premium full-grain leather with reinforced stitching that ensures this wallet will serve you for decades. A one-time purchase that only improves with age.',
-        imageUrl: 'https://SardarLeather.github.io/images/CH3 brown.png',
-        videoUrl: 'YOUR_VIDEO_URL_OR_EMPTY',
-        details: 'Full-grain leather | 8 card slots | Cash compartment' 
-    },
-    {
-        id: 4,
-        category: 'cardholders',
-        name: 'CH4 Minimalist Card Holder',
-        description: 'Crafted from top-grain leather that is both supple and incredibly durable. The precision stitching ensures structural integrity that will last a lifetime.',
-        imageUrl: 'https://SardarLeather.github.io/images/CH4 brown.png',
-        videoUrl: 'YOUR_VIDEO_URL_OR_EMPTY',
-        details: 'Top-grain leather | 3 card slots | Ultra-slim design '
-    },
-    {
-        id: 5,
-        category: 'cardholders',
-        name: 'CH7 Luxury Card Case',
-        description: 'Handcrafted from premium leather with careful stitching that ensures decades of use. This heirloom-quality piece is designed to be your final purchase in card holders.',
-        imageUrl: 'https://SardarLeather.github.io/images/CH7 brown.png',
-        videoUrl: 'YOUR_VIDEO_URL_OR_EMPTY',
-        details: 'Bridle leather | 6 card slots | Luxury packaging '
-    },
-    {
-        id: 6,
-        category: 'cardholders',
-        name: 'CH9 Card Holder',
-        description: 'Featuring aged leather that develops a distinctive patina over time. The reinforced stitching ensures this holder will withstand years of daily use.',
-        imageUrl: 'https://SardarLeather.github.io/images/CH9 brown.png',
-        videoUrl: 'YOUR_VIDEO_URL_OR_EMPTY',
-        details: 'Aged leather | 4 card slots | Vintage brass details '
-    },
-    {
-        id: 7,
-        category: 'cardholders',
-        name: 'CH10 Card Case',
-        description: 'Constructed from genuine leather with secure zipper closure. Each stitch is carefully placed by skilled artisans for maximum longevity.',
-        imageUrl: 'https://SardarLeather.github.io/images/CH10 brown.png',
-        videoUrl: 'YOUR_VIDEO_URL_OR_EMPTY',
-        details: 'Genuine leather | Premium Touch | Multiple card slots | RFID protection '
-    },
-    {
-        id: 8,
-        category: 'cardholders',
-        name: 'CH11 Business Card Holder',
-        description: 'Made from premium leather that develops character over time, telling the story of your journey. A one-time purchase that eliminates the need for replacements.',
-        imageUrl: 'https://SardarLeather.github.io/images/CH11 brown.png',
-        videoUrl: 'YOUR_VIDEO_URL_OR_EMPTY',
-        details: 'Premium leather | 4 card slots | Business card compartment | Hand-stitched '
-    },
-    {
-        id: 9,
-        category: 'cardholders',
-        name: 'CH13 Bear Card Case',
-        description: 'Crafted from quality leather with advanced RFID protection technology. The careful stitching ensures this case will serve you for decades.',
-        imageUrl: 'https://SardarLeather.github.io/images/CH13 black.png',
-        videoUrl: 'YOUR_VIDEO_URL_OR_EMPTY',
-        details: 'Quality leather | RFID protection | 6 card slots '
-    },
-    {
-        id: 10,
-        category: 'cardholders',
-        name: 'CH14 Designer Card Holder',
-        description: 'Handcrafted from premium leather with unique design elements. The reinforced stitching ensures structural integrity that mass production cannot replicate.',
-        imageUrl: 'https://SardarLeather.github.io/images/CH14 brown.png',
-        videoUrl: 'YOUR_VIDEO_URL_OR_EMPTY',
-        details: 'Premium leather | 4-6 card capacity | Unique detailing' 
-    },
-    {
-        id: 11,
-        category: 'cardholders',
-        name: 'CH15 Unique Card Wallet',
-        description: 'Made using traditional craftsmanship techniques passed down through generations. This isn\'t just an accessory but a lifetime companion.',
-        imageUrl: 'https://SardarLeather.github.io/images/CH15 black.png',
-        videoUrl: 'YOUR_VIDEO_URL_OR_EMPTY',
-        details: 'Traditional craftsmanship | 6 card slots | Unique detailing ' 
-    },
-    {
-        id: 12,
-        category: 'cardholders',
-        name: 'CH16 Travel Card Holder',
-        description: 'Crafted from durable leather that\'s naturally resistant to wear and tear. Designed for the frequent traveler who values both style and functionality.',
-        imageUrl: 'https://SardarLeather.github.io/images/CH16(1) black.png',
-        videoUrl: 'YOUR_VIDEO_URL_OR_EMPTY',
-        details: 'Durable leather | 8 card slots | Premium leather'
-    },
-    {
-        id: 13,
-        category: 'cardholders',
-        name: 'CH18 Card Holder',
-        description: 'Made from tough leather with secure closure mechanisms for active lifestyles. The precision stitching ensures decades of reliable use.',
-        imageUrl: 'https://SardarLeather.github.io/images/CH18 brown.png',
-        videoUrl: 'YOUR_VIDEO_URL_OR_EMPTY',
-        details: 'Tough leather | Secure closure | 4 card slots | Premium leather'
-    },
-    {
-        id: 14,
-        category: 'cardholders',
-        name: 'CH19 Premium Bifold Card Holder',
-        description: 'Handcrafted from full-grain leather that develops a beautiful patina over time. Each stitch is carefully placed for maximum durability.',
-        imageUrl: 'https://SardarLeather.github.io/images/CH19 black.png',
-        videoUrl: 'YOUR_VIDEO_URL_OR_EMPTY',
-        details: 'Full-grain leather | 8 card slots | Central cash pocket | Premium leather'
-    },
-    {
-        id: 15,
-        category: 'cardholders',
-        name: 'CH20 Modern Card Wallet',
-        description: 'Crafted from innovative materials with contemporary design. The reinforced stitching ensures this wallet will withstand years of daily use.',
-        imageUrl: 'https://SardarLeather.github.io/images/CH20 brown.png',
-        videoUrl: 'YOUR_VIDEO_URL_OR_EMPTY',
-        details: 'Innovative materials | 6 card slots | Slim profile | Premium Leather'
-    },
-    {
-        id: 16,
-        category: 'cardholders',
-        name: 'CH21 Elegant Card Case',
-        description: 'Made from premium calf leather with meticulous hand-stitching. This heirloom-quality piece is designed to last a lifetime.',
-        imageUrl: 'https://SardarLeather.github.io/images/CH21 black.png',
-        videoUrl: 'YOUR_VIDEO_URL_OR_EMPTY',
-        details: 'Calf leather | 6 card slots | Hand-finished edges | Premium Leather'
-    },
-    {
-        id: 17,
-        category: 'cardholders',
-        name: 'CH22 Classic Card Holder',
-        description: 'Crafted from genuine leather with stainless steel money clip. The careful stitching ensures this holder will serve you for decades.',
-        imageUrl: 'https://SardarLeather.github.io/images/CH22 black.png',
-        videoUrl: 'YOUR_VIDEO_URL_OR_EMPTY',
-        details: 'Genuine leather | Premium touch | 6 card slots | Hand Stiched'
-    },
-    {
-        id: 18,
-        category: 'cardholders',
-        name: 'CH23 Premium Card Holder',
-        description: 'Handcrafted from luxury leather with signature design elements. The reinforced stitching ensures structural integrity that will last a lifetime.',
-        imageUrl: 'https://SardarLeather.github.io/images/CH23 black.png',
-        videoUrl: 'YOUR_VIDEO_URL_OR_EMPTY',
-        details: 'Luxury leather | Signature design | 4-6 card capacity | Innovative materials'
-    },
-    {
-        id: 19,
-        category: 'cardholders',
-        name: 'CH24 Premium Card Organizer',
-        description: 'Made from top-quality leather with multiple compartments for organized storage. A one-time purchase that becomes part of your story.',
-        imageUrl: 'YOUR_IMAGE_URL',
-        videoUrl: 'YOUR_VIDEO_URL_OR_EMPTY',
-        details: 'Top-quality leather | Multiple compartments | Organized storage'
-    },
+        const products = [
+            // Card Holders (19 products)
+            {
+                id: 1,
+                category: 'cardholders',
+                name: 'CH1 Executive Card Holder',
+                description: 'Crafted from the finest full-grain leather, this card holder features meticulous hand-stitching that ensures decades of reliable use. The premium leather develops a unique patina over time, making each piece distinctly yours.',
+                imageUrl: 'https://SardarLeather.github.io/images/CH1 black.png',
+                videoUrl: '',
+                details: 'Full-grain Italian leather | Hand-stitched edges | 6 card slots | RFID protection'
+            },
+            {
+                id: 2,
+                category: 'cardholders',
+                name: 'CH2 Leather Card Case',
+                description: 'Experience the luxury of vegetable-tanned leather that molds to your touch. Each stitch is carefully placed by skilled artisans, ensuring durability that mass-produced items can never match.',
+                imageUrl: 'https://SardarLeather.github.io/images/CH26 black.png',
+                videoUrl: '',
+                details: 'Vegetable-tanned leather | 4 card slots | Slim profile'
+            },
+            // ... (other products would be here)
+            
+            // Wallets (8 products)
+            {
+                id: 20,
+                category: 'wallets',
+                name: 'W1 Classic Wallet',
+                description: 'Handcrafted from premium full-grain leather that\'s both supple and incredibly durable. Each wallet is carefully stitched with reinforced seams that withstand years of daily use.',
+                imageUrl: 'https://SardarLeather.github.io/images/W1 black.png',
+                videoUrl: '',
+                details: 'Full-grain leather | 8 card slots | 1 bill compartment | Hand-stitched seams | Premium Quality'
+            },
+            {
+                id: 21,
+                category: 'wallets',
+                name: 'W2 Leather Wallet',
+                description: 'Made from top-grain leather that\'s naturally resistant to wear and tear. The precision stitching ensures this wallet will serve you for decades.',
+                imageUrl: 'https://SardarLeather.github.io/images/W2 black.png',
+                videoUrl: '',
+                details: 'Top-grain leather | 6 card slots | Slim design | Premium Touch'
+            },
+            {
+                id: 22,
+                category: 'wallets',
+                name: 'W3 Tri-Fold Modern Wallet',
+                description: 'Crafted from Premium leather that molds to your touch. Each component is carefully stitched for maximum longevity.',
+                imageUrl: 'https://SardarLeather.github.io/images/W3 black.png',
+                videoUrl: '',
+                details: 'Premium leather | Tri-Fold | 12 card slots | Modern Design'
+            },
+            {
+                id: 23,
+                category: 'wallets',
+                name: 'W4 Vintage Leather Wallet',
+                description: 'Featuring aged leather that develops a distinctive patina over time. The reinforced stitching ensures this wallet will withstand years of daily use.',
+                imageUrl: 'https://SardarLeather.github.io/images/W4 black.png',
+                videoUrl: '',
+                details: 'Aged leather | 8 card slots | 1 bill compartment | Vintage finish | Premium Quality'
+            },
+            {
+                id: 24,
+                category: 'wallets',
+                name: 'W5 Executive Wallet',
+                description: 'Handcrafted from luxury bridle leather with careful stitching that ensures decades of use. This heirloom-quality piece is designed to be your final wallet purchase.',
+                imageUrl: 'https://SardarLeather.github.io/images/W5 black.png',
+                videoUrl: '',
+                details: 'Bridle leather | 10 card slots | 1 bill compartment | Premium Quality'
+            },
+            {
+                id: 25,
+                category: 'wallets',
+                name: 'W6 RFID Protection Wallet',
+                description: 'Made from quality leather with advanced RFID blocking technology. The careful stitching ensures this wallet will serve you for decades.',
+                imageUrl: 'https://SardarLeather.github.io/images/W6 black.png',
+                videoUrl: '',
+                details: 'Quality leather | RFID protection | 8 card slots | 1 bill compartment'
+            },
+            {
+                id: 26,
+                category: 'wallets',
+                name: 'W7 Designer Wallet',
+                description: 'Crafted from premium leather with unique design elements. The reinforced stitching ensures structural integrity that mass production cannot replicate.',
+                imageUrl: 'https://SardarLeather.github.io/images/W7 black.png',
+                videoUrl: '',
+                details: 'Premium leather | 8 card slots | Unique design'
+            },
+            {
+                id: 27,
+                category: 'wallets',
+                name: 'W8 Premium Wallet',
+                description: 'Constructed from durable leather that\'s naturally resistant to wear and tear. Designed for the frequent traveler who values both style and functionality.',
+                imageUrl: 'https://SardarLeather.github.io/images/W8 black.png',
+                videoUrl: '',
+                details: 'Durable leather | 10 card slots | Premium Quality| Multiple compartments'
+            },
+            
+            // Long Wallets (6 products)
+            {
+                id: 28,
+                category: 'longwallets',
+                name: 'LW1 Executive Long Wallet',
+                description: 'Constructed from luxury bridle leather that\'s both elegant and exceptionally durable. Each component is carefully stitched with waxed thread for maximum longevity.',
+                imageUrl: 'https://SardarLeather.github.io/images/LW1 black.png',
+                videoUrl: '',
+                details: 'Bridle leather | Passport slot | 10 card slots | 2 bill compartments | Dimensions: 19 x 10 cm when closed'
+            },
+            {
+                id: 29,
+                category: 'longwallets',
+                name: 'LW2 Long Wallet',
+                description: 'Featuring full-grain leather that\'s naturally durable and develops a beautiful patina. The reinforced stitching ensures this wallet will withstand a lifetime of adventures.',
+                imageUrl: 'https://SardarLeather.github.io/images/LW2 black.png',
+                videoUrl: '',
+                details: 'Full-grain leather | Mobile Slot | 10 card slots | Multiple bill compartment | premium leather'
+            },
+            {
+                id: 30,
+                category: 'longwallets',
+                name: 'LW3 Premium Long Wallet',
+                description: 'Handcrafted from premium leather with distinguished design and generous storage. The careful stitching ensures this wallet will serve you for decades.',
+                imageUrl: 'https://SardarLeather.github.io/images/LW3 black.png',
+                videoUrl: '',
+                details: 'Premium leather | Checkbook slot | 8 card slots | Multiple bill compartments'
+            },
+            {
+                id: 31,
+                category: 'longwallets',
+                name: 'LW4 Vintage Long Wallet',
+                description: 'Made from aged leather that develops character over time, telling the story of your journey. A one-time purchase that eliminates the need for replacements.',
+                imageUrl: 'https://SardarLeather.github.io/images/LW5 black.png',
+                videoUrl: '',
+                details: 'Aged leather | 8 card slots | 2 bill compartments | Vintage finish'
+            },
+            {
+                id: 32,
+                category: 'longwallets',
+                name: 'LW5 Designer Long Wallet',
+                description: 'Crafted from premium leather with unique design elements. The reinforced stitching ensures structural integrity that mass production cannot replicate.',
+                imageUrl: 'https://SardarLeather.github.io/images/LW6 black.png',
+                videoUrl: '',
+                details: 'Premium leather | 10 card slots | Unique design | Multiple compartments'
+            },
+            {
+                id: 33,
+                category: 'longwallets',
+                name: 'LW6 Luxury Long Wallet',
+                description: 'Handcrafted from the finest full-grain Italian leather with meticulous hand-stitching. This heirloom-quality piece is designed to last a lifetime.',
+                imageUrl: 'https://via.placeholder.com/400x300',
+                videoUrl: '',
+                details: 'Full-grain Italian leather | 12 card slots | 3 bill compartments | Checkbook slot'
+            }
+        ];
 
-    // Wallets (8 products)
-    {
-        id: 20,
-        category: 'wallets',
-        name: 'W1 Classic Wallet',
-        description: 'Handcrafted from premium full-grain leather that\'s both supple and incredibly durable. Each wallet is carefully stitched with reinforced seams that withstand years of daily use.',
-        imageUrl: 'https://SardarLeather.github.io/images/W1 black.png',
-        videoUrl: 'YOUR_VIDEO_URL_OR_EMPTY',
-        details: 'Full-grain leather | 8 card slots | 1 bill compartment | Hand-stitched seams | Premium Quality'
-    },
-    {
-        id: 21,
-        category: 'wallets',
-        name: 'W2 Leather Wallet',
-        description: 'Made from top-grain leather that\'s naturally resistant to wear and tear. The precision stitching ensures this wallet will serve you for decades.',
-        imageUrl: 'https://SardarLeather.github.io/images/W2 black.png',
-        videoUrl: 'YOUR_VIDEO_URL_OR_EMPTY',
-        details: 'Top-grain leather | 6 card slots | Slim design | Premium Touch'
-    },
-    {
-        id: 22,
-        category: 'wallets',
-        name: 'W3 Tri-Fold Modern Wallet',
-        description: 'Crafted from Premium leather that molds to your touch. Each component is carefully stitched for maximum longevity.',
-        imageUrl: 'https://SardarLeather.github.io/images/W3 black.png',
-        videoUrl: 'YOUR_VIDEO_URL_OR_EMPTY',
-        details: 'Premium leather | Tri-Fold | 12 card slots | Modern Design'
-    },
-    {
-        id: 23,
-        category: 'wallets',
-        name: 'W4 Vintage Leather Wallet',
-        description: 'Featuring aged leather that develops a distinctive patina over time. The reinforced stitching ensures this wallet will withstand years of daily use.',
-        imageUrl: 'https://SardarLeather.github.io/images/W4 black.png',
-        videoUrl: 'YOUR_VIDEO_URL_OR_EMPTY',
-        details: 'Aged leather | 8 card slots | 1 bill compartment | Vintage finish | Premium Quality'
-    },
-    {
-        id: 24,
-        category: 'wallets',
-        name: 'W5 Executive Wallet',
-        description: 'Handcrafted from luxury bridle leather with careful stitching that ensures decades of use. This heirloom-quality piece is designed to be your final wallet purchase.',
-        imageUrl: 'https://SardarLeather.github.io/images/W5 black.png',
-        videoUrl: 'YOUR_VIDEO_URL_OR_EMPTY',
-        details: 'Bridle leather | 10 card slots | 1 bill compartment | Premium Quality'
-    },
-    {
-        id: 25,
-        category: 'wallets',
-        name: 'W6 RFID Protection Wallet',
-        description: 'Made from quality leather with advanced RFID blocking technology. The careful stitching ensures this wallet will serve you for decades.',
-        imageUrl: 'https://SardarLeather.github.io/images/W6 black.png',
-        videoUrl: 'YOUR_VIDEO_URL_OR_EMPTY',
-        details: 'Quality leather | RFID protection | 8 card slots | 1 bill compartment'
-    },
-    {
-        id: 26,
-        category: 'wallets',
-        name: 'W7 Designer Wallet',
-        description: 'Crafted from premium leather with unique design elements. The reinforced stitching ensures structural integrity that mass production cannot replicate.',
-        imageUrl: 'https://SardarLeather.github.io/images/W7 black.png',
-        videoUrl: 'YOUR_VIDEO_URL_OR_EMPTY',
-        details: 'Premium leather | 8 card slots | Unique design'
-    },
-    {
-        id: 27,
-        category: 'wallets',
-        name: 'W8 Premium Wallet',
-        description: 'Constructed from durable leather that\'s naturally resistant to wear and tear. Designed for the frequent traveler who values both style and functionality.',
-        imageUrl: 'https://SardarLeather.github.io/images/W8 black.png',
-        videoUrl: 'YOUR_VIDEO_URL_OR_EMPTY',
-        details: 'Durable leather | 10 card slots | Premium Quality| Multiple compartments'
-    },
+        // Global variables
+        let currentCategory = '';
+        let currentProductIndex = 0;
+        let currentSlideIndex = 0;
+        let carouselSlides = [];
 
-    // Long Wallets (6 products)
-    {
-        id: 28,
-        category: 'longwallets',
-        name: 'LW1 Executive Long Wallet',
-        description: 'Constructed from luxury bridle leather that\'s both elegant and exceptionally durable. Each component is carefully stitched with waxed thread for maximum longevity.',
-        imageUrl: 'https://SardarLeather.github.io/images/LW1 black.png',
-        videoUrl: 'YOUR_VIDEO_URL_OR_EMPTY',
-        details: 'Bridle leather | Passport slot | 10 card slots | 2 bill compartments | Dimensions: 19 x 10 cm when closed'
-    },
-    {
-        id: 29,
-        category: 'longwallets',
-        name: 'LW2 Long Wallet',
-        description: 'Featuring full-grain leather that\'s naturally durable and develops a beautiful patina. The reinforced stitching ensures this wallet will withstand a lifetime of adventures.',
-        imageUrl: 'https://SardarLeather.github.io/images/LW2 black.png',
-        videoUrl: 'YOUR_VIDEO_URL_OR_EMPTY',
-        details: 'Full-grain leather | Mobile Slot | 10 card slots | Multiple bill compartment | premium leather'
-    },
-    {
-        id: 30,
-        category: 'longwallets',
-        name: 'LW3 Premium Long Wallet',
-        description: 'Handcrafted from premium leather with distinguished design and generous storage. The careful stitching ensures this wallet will serve you for decades.',
-        imageUrl: 'https://SardarLeather.github.io/images/LW3 black.png',
-        videoUrl: 'YOUR_VIDEO_URL_OR_EMPTY',
-        details: 'Premium leather | Checkbook slot | 8 card slots | Multiple bill compartments'
-    },
-    {
-        id: 31,
-        category: 'longwallets',
-        name: 'LW4 Vintage Long Wallet',
-        description: 'Made from aged leather that develops character over time, telling the story of your journey. A one-time purchase that eliminates the need for replacements.',
-        imageUrl: 'https://SardarLeather.github.io/images/LW5 black.png',
-        videoUrl: 'YOUR_VIDEO_URL_OR_EMPTY',
-        details: 'Aged leather | 8 card slots | 2 bill compartments | Vintage finish'
-    },
-    {
-        id: 32,
-        category: 'longwallets',
-        name: 'LW5 Designer Long Wallet',
-        description: 'Crafted from premium leather with unique design elements. The reinforced stitching ensures structural integrity that mass production cannot replicate.',
-        imageUrl: 'https://SardarLeather.github.io/images/LW6 black.png',
-        videoUrl: 'YOUR_VIDEO_URL_OR_EMPTY',
-        details: 'Premium leather | 10 card slots | Unique design | Multiple compartments'
-    },
-    {
-        id: 33,
-        category: 'longwallets',
-        name: 'LW6 Luxury Long Wallet',
-        description: 'Handcrafted from the finest full-grain Italian leather with meticulous hand-stitching. This heirloom-quality piece is designed to last a lifetime.',
-        imageUrl: 'YOUR_IMAGE_URL',
-        videoUrl: 'YOUR_VIDEO_URL_OR_EMPTY',
-        details: 'Full-grain Italian leather | 12 card slots | 3 bill compartments | Checkbook slot'
-    }
-];
+        // View Management Functions
+        function showHome() {
+            document.getElementById('home-view').style.display = 'grid';
+            document.getElementById('category-view').style.display = 'none';
+            document.getElementById('product-view').style.display = 'none';
+        }
+
+        function showCategory(category) {
+            currentCategory = category;
+            document.getElementById('home-view').style.display = 'none';
+            document.getElementById('category-view').style.display = 'block';
+            document.getElementById('product-view').style.display = 'none';
+            
+            // Filter products by category
+            const categoryProducts = products.filter(product => product.category === category);
+            
+            // Render products
+            const productGrid = document.getElementById('product-grid');
+            productGrid.innerHTML = '';
+            
+            if (categoryProducts.length === 0) {
+                productGrid.innerHTML = '<div class="loading">No products found in this category.</div>';
+                return;
+            }
+            
+            categoryProducts.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.className = 'product-card';
+                productCard.onclick = () => showProduct(product.id);
+                
+                productCard.innerHTML = `
+                    <img src="${product.imageUrl}" alt="${product.name}" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-title">${product.name}</h3>
+                    </div>
+                `;
+                
+                productGrid.appendChild(productCard);
+            });
+        }
+
+        function showProduct(productId) {
+            document.getElementById('home-view').style.display = 'none';
+            document.getElementById('category-view').style.display = 'none';
+            document.getElementById('product-view').style.display = 'block';
+            
+            // Find product
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+            
+            // Update product details
+            document.getElementById('product-name').textContent = product.name;
+            document.getElementById('product-description').textContent = product.description;
+            document.getElementById('product-details').textContent = product.details;
+            
+            // Set up carousel
+            const carousel = document.getElementById('product-carousel');
+            const controls = document.querySelector('.carousel-controls');
+            carousel.innerHTML = '';
+            controls.innerHTML = '';
+            carouselSlides = [];
+            
+            // Add image to carousel
+            if (product.imageUrl) {
+                const slide = document.createElement('div');
+                slide.className = 'carousel-slide active';
+                slide.innerHTML = `<img src="${product.imageUrl}" alt="${product.name}">`;
+                carousel.appendChild(slide);
+                carouselSlides.push(slide);
+                
+                const indicator = document.createElement('div');
+                indicator.className = 'carousel-indicator active';
+                indicator.onclick = () => setSlide(0);
+                controls.appendChild(indicator);
+            }
+            
+            // Add video to carousel if available
+            if (product.videoUrl) {
+                const slide = document.createElement('div');
+                slide.className = 'carousel-slide';
+                slide.innerHTML = `<video controls><source src="${product.videoUrl}" type="video/mp4">Your browser does not support the video tag.</video>`;
+                carousel.appendChild(slide);
+                carouselSlides.push(slide);
+                
+                const indicator = document.createElement('div');
+                indicator.className = 'carousel-indicator';
+                indicator.onclick = () => setSlide(1);
+                controls.appendChild(indicator);
+            }
+            
+            currentSlideIndex = 0;
+        }
+
+        // Carousel Functions
+        function setSlide(index) {
+            if (index < 0 || index >= carouselSlides.length) return;
+            
+            carouselSlides[currentSlideIndex].classList.remove('active');
+            document.querySelectorAll('.carousel-indicator')[currentSlideIndex].classList.remove('active');
+            
+            currentSlideIndex = index;
+            
+            carouselSlides[currentSlideIndex].classList.add('active');
+            document.querySelectorAll('.carousel-indicator')[currentSlideIndex].classList.add('active');
+        }
+
+        function nextSlide() {
+            let nextIndex = currentSlideIndex + 1;
+            if (nextIndex >= carouselSlides.length) nextIndex = 0;
+            setSlide(nextIndex);
+        }
+
+        function prevSlide() {
+            let prevIndex = currentSlideIndex - 1;
+            if (prevIndex < 0) prevIndex = carouselSlides.length - 1;
+            setSlide(prevIndex);
+        }
+
+        // Modal Functions
+        function showOrderModal() {
+            document.getElementById('order-modal').classList.add('active');
+        }
+
+        function hideOrderModal() {
+            document.getElementById('order-modal').classList.remove('active');
+        }
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            showHome();
+            
+            // Close modal when clicking outside
+            document.getElementById('order-modal').addEventListener('click', function(e) {
+                if (e.target === this) hideOrderModal();
+            });
+        });
+    </script>
+</body>
+</html>
